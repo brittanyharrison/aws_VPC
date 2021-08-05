@@ -139,3 +139,17 @@ Inbound: SSH
 - Security Group: db security group
 
 3. Create a bastion instance
+
+- AMI: Ubuntu
+- Instance type: t2 micro
+- Instance Details: Your VPC -> Bastion Subnet -> Assign public ip enabled
+- Security Group: bastion security group
+
+**Step 7: Copy key and ssh into dB**
+
+1. Command to copy key:
+`scp -i eng89_devops.pem eng89_devops.pem ubuntu@52.50.176.145:/home/ubuntu/.ssh/ `
+
+2. Now you should be able to ssh into the db server from the bastions server 
+
+**Step 8: Deploy app**
