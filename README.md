@@ -57,6 +57,11 @@ In my case I will be using `10.104.0.0` for my IPv4 CIDR
 - **Public**: CIDR block IP changes slightly by adding 1 instad of 0 in the 3rd optec
 - **Private**: CIDR block IP changes slightly by adding 2 instad of 0 in the 3rd optec
 
+3. Create a subnet for the bastion 
+
+- CIDR: 3RD  octec =3
+- edit Route table association : Public rt
+
 **Step 4: Creating a Route Table**
 
 1. On the left hand toolbar click on `route table`
@@ -84,3 +89,53 @@ In my case I will be using `10.104.0.0` for my IPv4 CIDR
 ![img](img/nacl_outbound_rules_public.png)
 
 5.  In the `subnet associations` select the public subnet created earlier and select edit
+
+6. On the private nacl add the following inbound rules:
+
+![img](img/nacl_private_inbound.png)
+
+7. On the private nacl add the following outbound rules:
+
+![img](img/nacl_private_outbound.png)
+
+8. Create Bastion Nacl with inbound and oubund rules:
+
+![img](img/nacl_bastion_rules.png)
+
+**Step 5: Creating security groups**
+
+1. Create a security group for the app:
+
+Inbound rules:
+- HTTP: Anywhere
+- SSH: My IP
+
+2. Create security group for the database
+
+Inbound rules:
+
+- Custom: Port 27017-> DB ip
+
+3. Create a security group for the bastion
+
+Inbound: SSH 
+
+
+
+**Step 6: Create the EC2 instances**
+
+1. Create the app EC2 instance
+
+- AMI: Ubuntu
+- Instance type: t2 micro
+- Instance Details: Your VPC -> Public Subnet -> Assign public ip enabled
+- Security Group: app security group
+
+2. Create the db EC2 instance
+
+- AMI: Ubuntu
+- Instance type: t2 micro
+- Instance Details: Your VPC -> Private Subnet -> Assign public ip disabled
+- Security Group: db security group
+
+3. Create a bastion instance
