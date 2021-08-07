@@ -1,7 +1,6 @@
 # AWS - Virtual Private Cloud (VPC)
 Amazon VPC is a service that lets you launch AWS resources in a logically isolated virtual network that you define. You can control your virtual network environment including selection of your own IP address range, creation of subnets, and configuration of route tables and network gateways. You can use both IPv4 and IPv6 for most resources in your virtual private cloud, helping to ensure secure and easy access to resources and applications.
 
-![img](img/Hnet-image.gif)
 
 ## Internet Gateway (IGW)
 An Internet gateway can transfer communications between an enterprise network and the Internet. The gateway converts information, data or other communications from one protocol or format to another. A router may perform some of the functions of a gateway.
@@ -26,21 +25,18 @@ Network Access Control (NAC) is a computer networking solution that uses a set o
 
 # Creating and Setting up VPC 
 
-**Step 1: Create a VPC**
+## Step 1: Create a VPC
 1. On the AWS Dashboard search for **VPC** and click on `Your VCP`.
 
 2. Select `Create VPC`
-![img](img/Create_VPC.png)
-
-
 
 3. Create a **Name tag** , add an **IPv4 CIDRblock** and click `Create VPC`
 
 In my case I will be using `10.104.0.0` for my IPv4 CIDR
 
-![img](img/VPC_Settings.png)
+![img](img/create_vpc.gif)
 
-**Step 2: Create Internet Gateway**
+## Step 2: Create Internet Gateway
 1.  Select `Internet Gateways` on the dashboard thenlect `Create Internet gateway` 
 
 2. Add a Name tag then click `Create Internet Gateway` 
@@ -49,38 +45,46 @@ In my case I will be using `10.104.0.0` for my IPv4 CIDR
 
 4. Select `Attach Internet Gateway`
 
-**Step 3: Creating a Subnet**
+![img](img/create_igw.gif)
+
+## Step 3: Creating a Subnet
 
 1. Click on `Subnet` onthe left toolbar then select `Create subnet` 
 
-2. Create a public and private subnet:
+2. Create a public, private and bastion subnet:
 
 - Select the VPC you previously created 
 - **Public**: CIDR block IP changes slightly by adding 1 instad of 0 in the 3rd optec
+
+![img](img/create_public_subnet.gif)
+
 - **Private**: CIDR block IP changes slightly by adding 2 instad of 0 in the 3rd optec
 
-3. Create a subnet for the bastion 
+![img](img/create_private_subnet.gif)
 
-- CIDR: 3RD  octec =3
-- edit Route table association : Public rt
+- **Bastion**: CIDR block IP changes slightly by adding 2 instad of 0 in the 3rd optec
 
-**Step 4: Creating a Route Table**
+![img](img/create_bastion_subnet.gif)
+
+## Step 4: Creating a Route Table
 
 1. On the left hand toolbar click on `route table`
 
-2. Create a public and priivate route table 
+2. Create a route table 
 
-3. Select the **public route table** and click `Action` then `Edit routes`
+3. Select the route table and click `Action` then `Edit routes`
 
 4. Then add a destination and target. The target I used was the internet gateway created earlier. Then click `save routes`
 
-5. One the **public route** click on subnet associations and then `edit subnet associations`. Select the public subnet and click on save.
+5. Click on subnet associations and then `edit subnet associations`. Select the public and bastion subnet and click on save.
+
+![img](img/create_rt.gif)
 
 **Step 4: Creating Network ACL**
 
 1. On the left hand side toolbar under security click on Network ACLs and then click create network ACL.
 
-2. Create a public and private NACL and select your VPC 
+2. Create a public private and bastion NACL and select your VPC 
 
 3. On the public nacl add the following inbound rules:
 
