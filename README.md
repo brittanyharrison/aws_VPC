@@ -25,6 +25,8 @@ Network Access Control (NAC) is a computer networking solution that uses a set o
 
 # Creating and Setting up VPC 
 
+![img](img/VPc-1.jpg)
+
 ## Step 1: Create a VPC
 1. On the AWS Dashboard search for **VPC** and click on `Your VCP`.
 
