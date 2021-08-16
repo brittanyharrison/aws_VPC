@@ -82,7 +82,7 @@ In my case I will be using `10.104.0.0` for my IPv4 CIDR
 
 ![img](img/create_rt.gif)
 
-**Step 4: Creating Network ACL**
+## Step 4: Creating Network ACL
 
 1. On the left hand side toolbar under security click on Network ACLs and then click create network ACL.
 
@@ -110,7 +110,7 @@ In my case I will be using `10.104.0.0` for my IPv4 CIDR
 
 ![img](img/nacl_bastion_rules.png)
 
-**Step 5: Creating security groups**
+## Step 5: Creating security groups
 
 1. Create a security group for the app:
 
